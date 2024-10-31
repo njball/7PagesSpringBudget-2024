@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8"> 
-		<title>UK Policy Decisions Spring Budget 2024</title> 
+		<title>UK Policy Decisions Autumn Budget 2024</title> 
 		<!--Specify where to find the d3.js JavaScript file - in the parent folder of the one where this file is stored -->
 		<script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
         <link   rel="stylesheet"
@@ -17,15 +17,15 @@
 		<script type="text/javascript">
 
             //Set title for piece
-            var visTitle = "UK Spring Budget 2024:";
-            var visDescr1_1 = "The UK budget was announced on 6th March 2024. Some measures will result in an ";
+            var visTitle = "UK Autumn Budget 2024:";
+            var visDescr1_1 = "The UK budget was announced on 30th October 2024. Some measures will result in an ";
             var visDescr1_2 = "increase in revenue";
             var visDescr1_3 = ", others in a ";
             var visDescr1_4 = "decrease to revenue" ;
             var visDescr1_5 = ".";
             var visDescr2 = "How do these compare across the whole budget?";
-            var visDataNotes_1 = "The area of each square represents the total impact of the measure over the period FY2023-24 to FY2028-29.";
-            var visDataNotes_2 = "Data source: https://assets.publishing.service.gov.uk/media/65e8581eea2f36001a3c8970/E03057752_HMT_Spring_Budget_Mar_24_TEXT_20pt_LP_PRINT__2_.pdf ";
+            var visDataNotes_1 = "The area of each square represents the total impact of the measure over the period FY2024-25 to FY2029-30.";
+            var visDataNotes_2 = "Data source: https://www.gov.uk/government/publications/autumn-budget-2024";
             var visDataNotes_3 = "Design inspiration: https://www.nytimes.com/interactive/2017/11/15/us/politics/every-tax-cut-in-the-house-tax-bill.html";
             var visDataNotes_4 = "Bar charts are a more conventional way of displaying such data, but are difficult to interpret when category headings are very long. This chart design was 100% inspired by one published by the NYTimes.";
 
@@ -92,7 +92,7 @@
 								;	
 			
 			//Start the d3 bit (need error as the first argument, even if you don't do anything with it)
-			d3.csv("Spring Budget 2024 - sorted UTF8.csv", function (error, varSquareData) {
+			d3.csv("Autumn Budget 2024 - sorted short names UTF8.csv", function (error, varSquareData) {
 
 				//Test data
 				//console.log(varSquareData[0]);
@@ -101,7 +101,7 @@
 	            });
 
 				//Define how many rows and columns you want in the grid
-				var numRows = 4;
+				var numRows = 5;
 				//Divide the number of entries by the number of rows and round up to get number of columns required
 				var numCols = Math.ceil(varSquareData.length / numRows);
 
@@ -150,7 +150,7 @@
 				//Define the scale
 				var linearScale = d3.scaleLinear()
 									.domain([0, largestSqLength])
-									.range([0, 1.4*RowHeight]);
+									.range([0, 1.35*RowHeight]);
 			
 
 				//Create a group to contain our squares (translated by mgTop and mgLeft)
@@ -285,8 +285,8 @@
                 .attr("font-size", "10px") 
                 .attr("fill", "grey")
                 .attr("y", svgNotesHeight - 50 )
-                .attr("transform", "translate(" + svgNotesWidth + ")")
-                .attr("text-anchor", "end")
+                .attr("transform", "translate(" + (svgNotesWidth -520) + ")")
+                .attr("text-anchor", "start")
                 .text(visDataNotes_1) ;
 
             var ourNotesText_3 = svgNotesContainer
@@ -295,7 +295,7 @@
                 .attr("font-size", "10px") 
                 .attr("fill", "grey")
                 .attr("y", svgNotesHeight - 20 )
-                .attr("transform", "translate(" + (svgNotesWidth - 740) + ")")
+                .attr("transform", "translate(" + (svgNotesWidth - 520) + ")")
                 .attr("text-anchor", "start")
                 .text(visDataNotes_2) ;    
                 
